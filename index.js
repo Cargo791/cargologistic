@@ -1,3 +1,4 @@
+// 🔹 Navbar scroll effect
 window.addEventListener("scroll", () => {
   const nav = document.querySelector(".ghost");
   if (window.scrollY > 50) {
@@ -7,7 +8,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-
+// 🔹 Tracking form functionality
 const form = document.getElementById("trackingForm");
 const resultDiv = document.getElementById("trackingResult");
 
@@ -18,6 +19,7 @@ form.addEventListener("submit", async (e) => {
   resultDiv.innerHTML = `<p class="text-gray-600">Tracking package...</p>`;
 
   try {
+    // ✅ Corrected API URL (points to your Render backend endpoint)
     const response = await fetch("https://cargoship.onrender.com/api/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -39,9 +41,9 @@ form.addEventListener("submit", async (e) => {
         statusColor = "bg-green-500";
       }
 
+      // ✅ Display shipment info
       resultDiv.innerHTML = `
         <div class="bg-white shadow-xl rounded-xl p-6 w-full max-w-2xl transition-all duration-700">
-          
           <!-- Progress bar -->
           <div class="relative w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden">
             <div id="progressBar" 
@@ -60,46 +62,60 @@ form.addEventListener("submit", async (e) => {
           <hr class="my-4">
 
           <h3 class="text-md font-semibold text-gray-700 mb-2">Sender</h3>
-          <p><strong>Name:</strong> ${data.senderName}</p>
-          <p><strong>Email:</strong> ${data.senderEmail}</p>
-          <p><strong>Phone:</strong> ${data.senderPhone}</p>
-          <p><strong>Address:</strong> ${data.senderAddress}</p>
+          <p><strong>Name:</strong> ${data.sender_name}</p>
+          <p><strong>Email:</strong> ${data.sender_email}</p>
+          <p><strong>Phone:</strong> ${data.sender_phone}</p>
+          <p><strong>Address:</strong> ${data.sender_address}</p>
 
           <hr class="my-4">
 
           <h3 class="text-md font-semibold text-gray-700 mb-2">Receiver</h3>
-          <p><strong>Name:</strong> ${data.receiverName}</p>
-          <p><strong>Email:</strong> ${data.receiverEmail}</p>
-          <p><strong>Phone:</strong> ${data.receiverPhone}</p>
-          <p><strong>Address:</strong> ${data.receiverAddress}</p>
+          <p><strong>Name:</strong> ${data.receiver_name}</p>
+          <p><strong>Email:</strong> ${data.receiver_email}</p>
+          <p><strong>Phone:</strong> ${data.receiver_phone}</p>
+          <p><strong>Address:</strong> ${data.receiver_address}</p>
 
           <hr class="my-4">
 
           <h3 class="text-md font-semibold text-gray-700 mb-2">Package Info</h3>
-          <p><strong>Description:</strong> ${data.packageDescription}</p>
-          <p><strong>Weight:</strong> ${data.packageWeight} kg</p>
+          <p><strong>Description:</strong> ${data.package_description}</p>
+          <p><strong>Weight:</strong> ${data.package_weight} kg</p>
 
           <hr class="my-6">
 
           <!-- Timeline -->
           <div class="flex justify-between items-center text-sm font-medium text-gray-600">
             <div class="flex flex-col items-center">
-              <div class="w-4 h-4 rounded-full mb-1 ${data.progressStage === 'picked_up' || data.progressStage !== 'picked_up' ? 'bg-green-500' : 'bg-gray-300'}"></div>
+              <div class="w-4 h-4 rounded-full mb-1 ${
+                data.progressStage === "picked_up" || data.progressStage !== "picked_up"
+                  ? "bg-green-500"
+                  : "bg-gray-300"
+              }"></div>
               Picked Up
             </div>
             <div class="flex-1 h-[2px] bg-gray-300 mx-2"></div>
             <div class="flex flex-col items-center">
-              <div class="w-4 h-4 rounded-full mb-1 ${['in_transit','out_for_delivery','delivered'].includes(data.progressStage) ? 'bg-green-500' : 'bg-gray-300'}"></div>
+              <div class="w-4 h-4 rounded-full mb-1 ${
+                ["in_transit", "out_for_delivery", "delivered"].includes(data.progressStage)
+                  ? "bg-green-500"
+                  : "bg-gray-300"
+              }"></div>
               In Transit
             </div>
             <div class="flex-1 h-[2px] bg-gray-300 mx-2"></div>
             <div class="flex flex-col items-center">
-              <div class="w-4 h-4 rounded-full mb-1 ${['out_for_delivery','delivered'].includes(data.progressStage) ? 'bg-green-500' : 'bg-gray-300'}"></div>
+              <div class="w-4 h-4 rounded-full mb-1 ${
+                ["out_for_delivery", "delivered"].includes(data.progressStage)
+                  ? "bg-green-500"
+                  : "bg-gray-300"
+              }"></div>
               Out for Delivery
             </div>
             <div class="flex-1 h-[2px] bg-gray-300 mx-2"></div>
             <div class="flex flex-col items-center">
-              <div class="w-4 h-4 rounded-full mb-1 ${data.progressStage === 'delivered' ? 'bg-green-500' : 'bg-gray-300'}"></div>
+              <div class="w-4 h-4 rounded-full mb-1 ${
+                data.progressStage === "delivered" ? "bg-green-500" : "bg-gray-300"
+              }"></div>
               Delivered
             </div>
           </div>
@@ -114,6 +130,6 @@ form.addEventListener("submit", async (e) => {
       resultDiv.innerHTML = `<div class="bg-red-100 text-red-700 p-4 rounded-md w-full max-w-md">${data.message}</div>`;
     }
   } catch (err) {
-    resultDiv.innerHTML = `<div class="bg-red-100 text-red-700 p-4 rounded-md w-full max-w-md">Error connecting to API</div>`;
+    resultDiv.innerHTML = `<div class="bg-red-100 text-red-700 p-4 rounded-md w-full max-w-md">⚠️ Error connecting to API</div>`;
   }
 });
