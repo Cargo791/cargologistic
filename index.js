@@ -18,7 +18,7 @@ form.addEventListener("submit", async (e) => {
   resultDiv.innerHTML = `<p class="text-gray-600">Tracking package...</p>`;
 
   try {
-    const response = await fetch("https://cargoship.onrender.com/", {
+    const response = await fetch("https://cargoship.onrender.com/api/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ trackingId }),
