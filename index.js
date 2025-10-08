@@ -7,6 +7,12 @@ window.addEventListener("scroll", () => {
     nav.classList.remove("scrolled");
   }
 });
+const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
 
 // 🔹 Tracking form functionality
 const form = document.getElementById("trackingForm");
