@@ -17,4 +17,18 @@
   background-color: #0A1F44;
   backdrop-filter: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border-bottom: 10px solid #e2e8f0;
+}
+ h1, h2, h3 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /* Use 400, 500, or 700 depending on thickness you want */
+  font-style: normal;
+}
+
+p, h4, h5, h6 {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400; /* Regular weight for text */
+  font-style: normal;
 }
